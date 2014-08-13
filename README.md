@@ -129,6 +129,61 @@ print fib(valor)
 
 > A tipagem do Python é forte, ou seja, o interpretador verifica se as operações são válidas e não faz coerções automáticas entre tipos incompatíveis. Para realizar a operação entre tipos não compatíveis, é necessário converter explicitamente o tipo da variável ou variáveis antes da operação.  ([Python para Desenvolvedores](http://ark4n.files.wordpress.com/2010/01/python_para_desenvolvedores_2ed.pdf))
 
+### Tipos
+TODO: Numérico, Listas, Tuplas, Dicionário, String, Operadores Booleanos
+
+### Sintaxe 
+
+#### Estruturas de controle
+
+#### Orientação a Ojetos
+##### Métodos Especiais
+##### Herança Simples
+##### Herança Múltipla
+##### Sobrecarga de operadores
+##### Meta Classes
+
+#### Módulos
+TODO: Explicar como são os módulos.
+TODO: Apresentar os principais módulos da linugagem Python.
+
+
+## Djanto
+
+### Criando um projeto
+
+### Servidor de desenvolvimento
+
+### Configuração do banco de dados
+
+### Criando modelos
+
+### Ativando os modelos
+
+### Brincando com a API
+
+### Conhecendo o painel administrativo do Django (Apenas introdutório)
+
+### Escreva a sua primeira View (Rotas)
+
+### Escrevendo mais Views
+
+### Templates
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
 
 
 
