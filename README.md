@@ -20,7 +20,7 @@ A outra parte que iremos tratar, sobre Django, foi baseada na documentação ofi
 
 ## Python 
 
-### Indrodução
+### Introdução
 
 Python é uma linguagem de altíssimo nível (Very High Level Language) :
 
@@ -91,8 +91,157 @@ Nota: Parte do conteúdo desta seção (Quem usa python) foi retirado do curto [
 
 ___
 
+### Variáveis e Tipos
 
-### Como é um programa em Python
+Nota: As explicações de variáveis e tipos dessata seção são baseadas na video aula [Python - Variáveis, Tipos de Dados e o comando Type](https://www.youtube.com/watch?v=SYioCdLPmfw).
+
+Uma variável, dentro de um programa, é uma posição na memória que armazena um valor. A variável possui um nome identificador para permitir que o programado escrever códio para acessa e manipula os dados da variável durante a excecução do programa. As variáveis possuem um tipo. Esse tipo determina o tipo de informação que a variável irá armazenar.  
+
+- Numéricos
+    - Inteiro 
+    - Ponto Flutuamte
+- Lógicos
+    - Booleano
+- Literais
+    - Caracteres e strings de caracteres
+- Lista
+- Tupla
+- Dicionário
+
+Uma variável em Python sempre deve ser inicializada. Ou seja, sempre que ela foi 
+definida é necessário atribuir um valor para ela. Assim, a região da memória reservada para a 
+memória irá ser inicializada. 
+
+Crindo uma variável no interpretador Python: 
+
+```
+>>> x = 6
+>>> x
+6
+>>> y = True
+>>> y
+True
+>>> w = 5.0 
+>>> w
+5.0
+>>> z = "Curso de python"
+>>> z
+'Curso de python'
+```
+
+É possível saber o tipo de uma variável usando a função *type()*.
+
+```
+>>> type(x)
+<type 'int'>
+>>> type(w)
+<type 'float'>
+>>> type(z)
+<type 'str'>
+```
+
+O conteúdo referente a listas, tuplas e dicionários foi forte mente inspirado na documentação do site [py.franciscosouza.net](http://py.franciscosouza.net). Mesmo o site sendo antigo, todo o conteúdo foi testado e validado no python 2.7. :)
+
+* Listas: É um conjunto ordenado de valores, onde cada valor é identificado por um índide. Listas são similares a strings, que são conjuntos ordenados de caracteres, com a diferença que os elementos de uma lista podem possuir qualquer tipo.
+
+Diferentemente das strings e das tuplas, as listas são mutaveis. Ou seja, é possível modificar seus elementos.
+
+```
+>>> lista = [1,2, 'Ana', 5.6, True]
+>>> lista
+[1, 2, 'Ana', 5.6, True]
+>>> numeros = range(1,5)
+>>> numeros
+[1, 2, 3, 4]
+>>> numeros[0]
+1
+>>> numeros[0] = 5
+>>> numeros
+[5, 2, 3, 4]
+>>> numeros[-1]
+4
+>>> numeros[-2]
+3
+>>> len(numeros)
+4
+>>> numeros.append(10) #Listas são mutáveis
+>>> numeros
+[5, 2, 3, 4, 10]
+>>> 5 in numeros #Verifica se o número 5 pertence a lista numeros
+True
+>>> cavaleiros = ['Athos', 'Porthos', 'Aramis']
+>>> "D'Artagnan" not in cavaleiros
+True
+>>> cavaleiros = cavaleiros + ["D'Artagnan",] #Listas são mutáveis
+>>> cavaleiros
+['Athos', 'Porthos', 'Aramis', "D'Artagnan"]
+```
+
+Tupla é um tipo de dado que é similar a lista. No caso, a tupla apresenta a característica de ser  *imutável*.
+
+```
+>>> tupla = 'a', 'b', 'c', 'd', 'e'
+>>> tupla
+('a', 'b', 'c', 'd', 'e')
+>>> tupla = ('a', 'b', 'c', 'd', 'e')
+>>> tupla
+('a', 'b', 'c', 'd', 'e')
+>>> t1 = ('a',) #tupla com valor único
+>>> tupla = ('A',) + tupla[1:] #A tupla é imutável, contudo é possível substituir uma tupla por outra
+>>> tupla
+('A', 'b', 'c', 'd', 'e')
+```
+
+As strings, listas e tuplas utilizam inteiros como indices. Já os dicionários utilizam qualquer tipo imutável de dados
+como indice. Um dicionário vazio é declarado com o uso de {}.
+
+```
+>>> ing2esp = {}
+>>> ing2esp['one'] = 'uno'
+>>> ing2esp['two'] = 'dos'
+>>> print ing2esp
+{'two': 'dos', 'one': 'uno'}
+```
+
+Os elementos de um dicionário são separados por virculas e o indice é separado do valor através de dois pontos.  No caso os indices 
+são chamados de chaves e os elementos de valor. Isso nos dá o conceito de chave-valor.
+
+```
+>>> ing2esp = {'one': 'uno', 'two': 'dos', 'three': 'tres'}
+>>> print ing2esp
+{'one': 'uno', 'three': 'tres', 'two': 'dos'}
+>>> print ing2esp['two']
+'dos'
+>>> ing2esp.keys() #Retorna as chaves
+['three', 'two', 'one']
+>>> ing2esp.values() #Retorna os valores
+['uno', 'tres', 'dos']
+>>> ing2esp.items() #Retorna o conjunto chave-valor na forma de uma lista de tuplas
+[('three', 'tres'), ('two', 'dos'), ('one', 'uno')]
+>>> ing2esp.has_key('one')
+True
+>>> del ing2esp['one'] #Remove um elemento do dicinário
+>>> print ing2esp
+{'three': 'tres', 'two': 'dos'}
+>>> ing2esp['four']='cuatro'
+>>> ing2esp
+{'four': 'cuatro', 'three': 'tres', 'two': 'dos'}
+```
+
+
+### Tipagem dinâmica
+
+> Python utiliza tipagem dinâmica, o que significa que o tipo de uma variável é inferido pelo interpretador em tempo de execução (isto é conhecido como Duck Typing). No momento em que uma variável é criada através de atribuição, o interpretador define um tipo para a variável, com as operações que podem ser aplicadas. ([Python para Desenvolvedores](http://ark4n.files.wordpress.com/2010/01/python_para_desenvolvedores_2ed.pdf))
+
+
+### Tipagem forte
+
+> A tipagem do Python é forte, ou seja, o interpretador verifica se as operações são válidas e não faz coerções automáticas entre tipos incompatíveis. Para realizar a operação entre tipos não compatíveis, é necessário converter explicitamente o tipo da variável ou variáveis antes da operação.  ([Python para Desenvolvedores](http://ark4n.files.wordpress.com/2010/01/python_para_desenvolvedores_2ed.pdf))
+
+
+### Sintaxe 
+
+#### Como é um programa em Python
 
 O Python utiliza a própria identação para a definição de blocos. No caso a [PEP8](http://legacy.python.org/dev/peps/pep-0008/) recomenda nunca usar o caracter de tabulação para fazer a codifição de dos blocos lógiso. Ao invés da tabulação recomendase configurar o editor de texto para se dar 4 espaços.
   
@@ -117,22 +266,6 @@ valor = int(raw_input("Digite o valor: "))
 print fib(valor)
 
 ```
-
-### Tipagem dinâmica
-
-
-> Python utiliza tipagem dinâmica, o que significa que o tipo de uma variável é inferido pelo interpretador em tempo de execução (isto é conhecido como Duck Typing). No momento em que uma variável é criada através de atribuição, o interpretador define um tipo para a variável, com as operações que podem ser aplicadas. ([Python para Desenvolvedores](http://ark4n.files.wordpress.com/2010/01/python_para_desenvolvedores_2ed.pdf))
-
-
-
-### Tipagem forte
-
-> A tipagem do Python é forte, ou seja, o interpretador verifica se as operações são válidas e não faz coerções automáticas entre tipos incompatíveis. Para realizar a operação entre tipos não compatíveis, é necessário converter explicitamente o tipo da variável ou variáveis antes da operação.  ([Python para Desenvolvedores](http://ark4n.files.wordpress.com/2010/01/python_para_desenvolvedores_2ed.pdf))
-
-### Tipos
-TODO: Numérico, Listas, Tuplas, Dicionário, String, Operadores Booleanos
-
-### Sintaxe 
 
 #### Estruturas de controle
 
