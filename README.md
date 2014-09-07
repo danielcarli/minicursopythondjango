@@ -142,7 +142,7 @@ True
 
 O conteúdo referente a listas, tuplas e dicionários foi forte mente inspirado na documentação do site [py.franciscosouza.net](http://py.franciscosouza.net). Mesmo o site sendo antigo, todo o conteúdo foi testado e validado no python 2.7. :)
 
-* Listas: É um conjunto ordenado de valores, onde cada valor é identificado por um índide. Listas são similares a strings, que são conjuntos ordenados de caracteres, com a diferença que os elementos de uma lista podem possuir qualquer tipo.
+**Listas**: São conjuntos ordenados de valores, onde cada valor é identificado por um índide. Listas são similares a strings, que são conjuntos ordenados de caracteres, com a diferença que os elementos de uma lista podem possuir qualquer tipo.
 
 Diferentemente das strings e das tuplas, as listas são mutaveis. Ou seja, é possível modificar seus elementos.
 
