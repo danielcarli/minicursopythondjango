@@ -267,6 +267,111 @@ print fib(valor)
 
 ```
 
+<<<<<<< HEAD
+=======
+### Tipagem dinâmica
+
+
+> Python utiliza tipagem dinâmica, o que significa que o tipo de uma variável é inferido pelo interpretador em tempo de execução (isto é conhecido como Duck Typing). No momento em que uma variável é criada através de atribuição, o interpretador define um tipo para a variável, com as operações que podem ser aplicadas. ([Python para Desenvolvedores](http://ark4n.files.wordpress.com/2010/01/python_para_desenvolvedores_2ed.pdf))
+
+Em muitos casos é comum de se atribuir a tendencia a erros de codificação no caso das liguagens que utilizam tipagem dinâmica. Afirma-se que a não declaração prévia do tipo gerar inconsistência nas operaçõe. Contudo, isso não diz respeito a tipagem dinâmica ou estática. Isso se refere se a linguagem é forte ou fracamente tipada. Na seção seguinte ([Tipagem Forte](#Tipagem forte)) abordamos essa questão em mais detalhes.
+
+Contudo, uma questão que comumente gera erros de programação é a questão instanciação de variáveis de forma automática. A linguagem PHP, e em muitos casos, apresenta propensão para esse tipo de erro de programação, que são difíceis de serem identificados. De forma mais explícita, por exemplom, no caso de uma variável $nome_aluno ser intanciado com o nome "João"  e o programador for referenciar ela posteriormente como $nome_aulno acapaba passado desapercebido, pois a segunda referência é considerada uma nova variáve mesmo sendo evidente o erro de digitação. 
+
+
+```
+<?php
+
+/**
+* Variáveis em PHP são instanciadas de forma automática. 
+* Isso acaba gerando uma maior propensão a erros de programação envolvendo 
+* variáveis não inicializadas ou digitadas de maneira erronea. 
+* Esses tipos de erros acabam ficando invisível ao programador, o que 
+* torna mais difícil a depuração de sistemas. 
+*/
+
+$nome_aluno = "João";
+
+echo $nome_aulno;
+
+?>
+```
+
+``` 
+# Python não instancia variávies de forma automática. 
+
+>>> nome_aluno = u"João"
+>>> print nome_aulno
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'nome_aulno' is not defined
+
+```
+
+
+### Tipagem forte
+
+> A tipagem do Python é forte, ou seja, o interpretador verifica se as operações são válidas e não faz coerções automáticas entre tipos incompatíveis. Para realizar a operação entre tipos não compatíveis, é necessário converter explicitamente o tipo da variável ou variáveis antes da operação.  ([Python para Desenvolvedores](http://ark4n.files.wordpress.com/2010/01/python_para_desenvolvedores_2ed.pdf))
+
+```
+/* Exemplo de código de tipagem fraca em JavaScript */
+
+> "5" + 2
+"52"
+> 2 + "5"
+"25"
+> "5" - 2
+3
+> 2 + ("5" - 1)
+6
+> "2" + ("5" - 1)
+"24"
+```
+
+```
+#Exemplo de tipagem fote com Python
+
+>>> "5" + 2
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: cannot concatenate 'str' and 'int' objects
+>>> 2 + "5" 
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unsupported operand type(s) for +: 'int' and 'str'
+>>> "5" - 2
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unsupported operand type(s) for -: 'str' and 'int'
+>>> 2  + ( "5" - 1)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unsupported operand type(s) for -: 'str' and 'int'
+>>> "2" + ("5" - 1)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unsupported operand type(s) for -: 'str' and 'int'
+```
+
+No caso dos exemplos acima, é possível perceber que o código JavaScript gera resultados diferentes para combinações de opeações envolvendo os mesmos tipos de dados. No primeiro caso existe a concatenação de uma string com um inteiro. O segundo comando basicamente é o primeiro em ordem invertida. Quando aplica-se um operador de subtração, o interpretador do JavaScript acaba convertendo o tipo do dado string para inteiro de forma automática. Por fim, **as duas útimas operações**, apresentadas no exemplo de JavaScript, mostram que **equações aparente mente iguais geram saidas completamente diferentes**, o que **resulta** em uma **inconsistência da linguagem**. Isso acaba gerando uma **série de erros de difícil identificação** no hora de programar uma aplicação. 
+
+Já no caso do mesmo código feito em Python, em todos os casos o interpretador gerou uma saida de erro não permitindo que a operação fosse realizada. Para fazer a operação de dados com tipos diferentes é necessário fazer a conversão expĺícita de tipo, como no exemplo abaixo.
+
+```
+#Exemplo de tipagem fote com Python com conversão explícita de tipo
+
+>>> "5" + str(2)
+'52'
+>>> 2 + int("5")
+7
+```
+
+### Tipos
+TODO: Numérico, Listas, Tuplas, Dicionário, String, Operadores Booleanos
+
+### Sintaxe 
+
+>>>>>>> 8e64ab05ae8291cbf367130066cc12b836ee7970
 #### Estruturas de controle
 
 #### Orientação a Ojetos
@@ -278,6 +383,7 @@ print fib(valor)
 
 #### Módulos
 TODO: Explicar como são os módulos.
+
 TODO: Apresentar os principais módulos da linugagem Python.
 
 
@@ -302,7 +408,6 @@ TODO: Apresentar os principais módulos da linugagem Python.
 ### Escrevendo mais Views
 
 ### Templates
-
 
 
 
