@@ -138,6 +138,12 @@ Uma variável, dentro de um programa, é uma posição na memória que armazena 
 - Tupla
 - Dicionário
 
+
+Os tipo de dados em Python podem ser:
+
+1. **Mutáveis**: permitem que os conteúdos das variáveis sejam alterados.1. **Imutáveis**: não permitem que os conteúdos das variáveis sejam alterados.
+
+
 Uma variável em Python sempre deve ser inicializada. Ou seja, sempre que ela foi 
 definida é necessário atribuir um valor para ela. Assim, a região da memória reservada para a 
 memória irá ser inicializada. 
@@ -412,11 +418,7 @@ Enquanto condição:
 Instruções
 ```
  
-
-#### Estruturas de controle e repetição
-
-
-Condicional
+#### Condicional
 
 ```
 if <condição>:
@@ -466,13 +468,82 @@ O python suporta a seguinte estrutura:
 ```
 <variável> = <valor 1> if <condição> else <valor 2>
 ```
+#### Laços
+Nota: Esta seção é adaptada do trabalho: ([Python para desenvolvedores](http://ark4n.wordpress.com/python/))
+
+Laços são estruturas de repetição.
+
+##### For
+A instrução aceita não só sequencias estáticas, mas também sequêncas geradas por iteradores. 
+
+Clausula _break_ interrompe o laço e a _continue__ passa para a próxima interação. O códio dentro do else é executado ao final do laço, exceto se o laço tenha sido interrompido pelo _break_.
+
+Sintaxe:
+
+```
+for <referência> in <sequência>:
+	<bloco de código>
+	continue
+	break
+else:
+	<bloco de código>
+``` 
+
+Exemplo:
+
+```
+# Soma de 0 a 99
+s = 0
+for x in range(1,100):
+    s = s + x
+
+print s
+```
+
+Saída:
+```
+4950
+```
+
+##### While
+
+Executa um bloco de código atendendo a uma condição.
+
+Sintaxe:
+
+```
+while <condição>:
+	<bloco de código>
+	continue
+	break
+else:
+	<bloco de código>
+```
+	
+Exemplo:
+
+```
+# Soma de 0 a 99
+
+s = 0 
+x = 1 
+
+while x < 100:
+    s = s + x 
+    x = x + 1
+    
+print s
+```
+
 
 
 #### Funções
+Nota: Esta seção é adaptada do trabalho: ([Python para desenvolvedores](http://ark4n.wordpress.com/python/))
 
 
 
 #### Como é um programa em Python
+Nota: Esta seção é adaptada do trabalho: ([Python para desenvolvedores](http://ark4n.wordpress.com/python/))
 
 O Python utiliza a própria identação para a definição de blocos. No caso a [PEP8](http://legacy.python.org/dev/peps/pep-0008/) recomenda nunca usar o caracter de tabulação para fazer a codifição de dos blocos lógiso. Ao invés da tabulação recomendase configurar o editor de texto para se dar 4 espaços.
   
