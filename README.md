@@ -540,41 +540,129 @@ print s
 #### Funções
 Nota: Esta seção é adaptada do trabalho: ([Python para desenvolvedores](http://ark4n.wordpress.com/python/))
 
+Funções são blocos de código identificadas por um nome, recebendo parâmetros pré-determinados
 
+1. Podem reternar ou não objetos
+2. Aceitam Doc Strings
+3. Aceitam parâmetros opicionais (com **default**)
+4. Aceitam que os **parâmetros sejam passados com nomes**. Neste caso, a ordem em que os parâmetros form passados não importa.
+5. Podem ter suas propriedades alteradas (em geral, decoradores).
 
-#### Como é um programa em Python
+> Doc Strings são strings que estão associadas a uma estrutura do Python. Nas funções, as Doc Strings são colocadas dentro do corpo da função, geralmente no começo. O objetivo das Doc Strings é servir de documentação para aquela estrutura.
+
+Sintaxe:
+
+```
+def func(parametro1, parametro2-padrao):
+    """
+    Doc String
+    """
+    <bloco de código>
+    return valor
+```
+
+Exemplo:
+
+```
+# Fatorial implementado de forma recursiva
+def fatorial(num):
+    if num <= 1:
+        return 1
+    else:
+        return (num * fatorial(num - 1))
+        
+# Testando fatorial()
+print fatorial(5)
+```
+
+Saída:
+
+```
+120
+```
+
+Exemplo (Fibonacci sem recursão):
+
+```
+def fib(n):
+    """
+    Fibonacci:
+    fib(n) = fib(n - 1) + fib(n - 2) se n > 1
+    fib(n) = 1 se n <= 1 
+    """
+    if n > 1:
+        return fib(n - 1) + fib(n - 2)
+    else:
+        return 1
+
+# Mostrar Fibonacci de 1 a 5
+for i in [1, 2, 3, 4, 5]:
+    print i, '=>', fib(i)
+```
+
+Saída:
+
+```
+1 => 1
+2 => 2
+3 => 3
+4 => 5
+5 => 8
+```
+
+Exemplo (Conversão de RGB):
+
+```
+# -*- coding: utf-8 -*-def rgb_html(r=0, g=0, b=0): 
+    """
+    Converte R, G, B em #RRGGBB
+    """    return '#%02x%02x%02x' % (r, g, b) 
+def html_rgb(color='#000000'):    """    Converte #RRGGBB em R, G, B    """    if color.startswith('#'): 
+        color = color[1:]        r = int(color[:2], 16) 
+        g = int(color[2:4], 16) 
+        b = int(color[4:], 16)    return r, g, b # Uma sequênciaprint rgb_html(200, 200, 255)
+print rgb_html(b=200, g=200, r=255) # O que houve? 
+print html_rgb('#c8c8ff')
+```
+
+Saída:
+
+```
+#c8c8ff
+#ffc8c8
+(200, 200, 255)
+```
+
+Exemplo de como receber todos parâmetros:
+
+```
+# -*- coding: utf-8 -*-# *args - argumentos sem nome (lista)# **kargs - argumentos com nome (dicionário)def func(*args, **kargs):     print args
+    print kargs
+    func('peso', 10, unidade='k')
+```
+
+Saída:
+
+```
+('peso', 10)
+{'unidade': 'k'}
+```
+
+#### Documentação
+
 Nota: Esta seção é adaptada do trabalho: ([Python para desenvolvedores](http://ark4n.wordpress.com/python/))
 
-O Python utiliza a própria identação para a definição de blocos. No caso a [PEP8](http://legacy.python.org/dev/peps/pep-0008/) recomenda nunca usar o caracter de tabulação para fazer a codifição de dos blocos lógiso. Ao invés da tabulação recomendase configurar o editor de texto para se dar 4 espaços.
-  
+PyDOC é a ferramenta de documentação15 do Python. Ela pode ser utilizada tanto para acessar a documentação dos módulos que acompanham o Python, quanto a documentação dos módulos de terceiros
+
+No Linux, a documentação das bibliotecas pode ser vista através do browser usando o comando:
 
 ```
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# o caracter '#' tem a função de comentário de linha
-# fib.py - é um pequeno programa em python que retorna a sequencia de fibonacci  
-"""
-Fibonacci 
-"""
-def fib(valor):
-    resultado = []
-    a, b = 0, 1
-    while b <= valor:
-        resultado.append(b)
-        a, b = b, a+b
-    return resultado
-
-valor = int(raw_input("Digite o valor: "))
-print fib(valor)
-
+￼￼pydoc -p 8000
 ```
 
-
+O PyDOC utiliza as Doc Strings dos módulos para gerar a documentação.
 
 ### Exercícios 1 
-
-
- 
 Nota: Exercícios retirados do livro [Python para desenvolvedores](http://ark4n.wordpress.com/python/)
 
 1. Implementar duas funções:
@@ -588,6 +676,90 @@ Nota: Exercícios retirados do livro [Python para desenvolvedores](http://ark4n.
 1. Crie uma função que:	1. Receba uma lista de tuplas (dados), um inteiro (chave, zero por padrão igual) e um booleano (reverso, falso por padrão).
 1.  Responda o que é tipagem forte e como isso influência na detecção de erros. (Exercício não tirado do livro)
 
+> **Números primos** são os números naturais que têm apenas dois divisores diferentes: o 1 e ele mesmo.
+> 
+>  - 1 não é um número primo, porque ele tem apenas um divisor que é ele mesmo.
+>  - 2 é o único número primo que é par.
+
+#### Módulos
+
+Nota: Esta seção é adaptada do trabalho: ([Python para desenvolvedores](http://ark4n.wordpress.com/python/))
+
+Para o Python, módulos são arquivos fonte que podem importados para um programa. Podem conter qualquer estrutura do Python e são executados quando importados. Possuem namespace próprio e aceitam Doc Strings. São **objetos Singleton** (é carregada somente uma instância em memória, que fica disponível de forma global para o programa).
+
+Os módulos são carregados através da instrução import. Desta forma, ao usar alguma estrutura do módulo, é necessário identificar o módulo. Isto é chamado de importação absoluta.
+
+Módulos:
+
+```
+import os
+print os.name
+```
+
+Importação de forma relativa:
+
+```
+from os import name
+print name
+```
+
+O caracter * poder ser usado para importar dudo que está definido no módulo:
+> NOTA: Nunca façam isso. :)
+> 
+> Por evitar problemas, como a ofuscação de variáveis, a importação absoluta é considerada uma prática de programação melhor do que a importação relativa.
+
+
+```
+form os import *
+print name
+```
+
+Exemplo de módulo:
+
+```
+# -*- coding: utf-8 -*-
+# mod_ex_media.py
+
+def media(lista):
+    return float(sum(lista))/len(lista)
+```
+
+Exemplo de uso do módulo:
+
+```
+# -*- coding: utf-8 -*-
+# mod_ex_media_2.py
+
+from mod_ex_media import media
+
+lista = [23, 54, 31, 77, 12, 34]
+
+print media(lista)
+```
+
+Saída:
+```
+38.5
+```
+
+O módulo principal de um programa tem a variável \_\_name\_\_ igual à “\_\_main\_\_”, então é possível testar se o módulo é o principal usando:
+
+```
+if __name__ == "__main__":
+   #Se este for o módulo o principal este código será executado.
+
+```
+ 
+#### Pacotes
+
+Nota: Esta seção é adaptada do trabalho: ([Python para desenvolvedores](http://ark4n.wordpress.com/python/))
+
+**Pacotes (packages) são pastas** que são **identificadas** pelo interpretador pela presença de um arquivo com o nome **"\_\_\_init\_\_.py"**. Os pacotes funcionam como coleções para organizar módulos de forma hierárquica.
+
+É possível importar todos os módulos do pacote usando a declaração from nome_do_pacote import *.
+
+O arquivo **"\_\_init\_\_.py" pode estar vazioou conter código de inicialização do pacote**  ou definir uma variável chamada \_\_all\_\_, uma lista de módulos do pacote serão importados quando for usado “*”.
+
 
 #### Orientação a Ojetos
 ##### Métodos Especiais
@@ -596,7 +768,6 @@ Nota: Exercícios retirados do livro [Python para desenvolvedores](http://ark4n.
 ##### Sobrecarga de operadores
 ##### Meta Classes
 
-#### Módulos
 TODO: Explicar como são os módulos.
 
 TODO: Apresentar os principais módulos da linugagem Python.
