@@ -30,7 +30,7 @@ Python é uma linguagem de altíssimo nível (Very High Level Language) :
 
 Histórico:
 
-- Surgiu em **1989**
+- Surgiu em **1991**
 - Criado por **Guido van Rossen**
 - Inspirado pelo **grupo de humor britânico Monty Python** 
 - **Licença livre** compatível com a GPL
@@ -90,6 +90,36 @@ Nota: Parte do conteúdo desta seção (Quem usa python) foi retirado do curto [
 > **Python é uma das cinco mais importantes linguagens que todo o programador deve conhecer.** (Bjarne Stroustrup, criador da linguagem C++.)
 
 ___
+
+### Cultura
+
+O termo Pythonic é usado para indicar que algo é compatível com as premissas de projeto do Python.
+
+**The Zen of Python**:
+
+```
+>>> import thisThe Zen of Python, by Tim Peters
+
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren't special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless you're Dutch.
+Now is better than never.
+Although never is often better than *right* now.
+If the implementation is hard to explain, it's a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea -- let's do more of those!```
+
 
 ### Variáveis e Tipos
 
@@ -239,36 +269,7 @@ True
 > A tipagem do Python é forte, ou seja, o interpretador verifica se as operações são válidas e não faz coerções automáticas entre tipos incompatíveis. Para realizar a operação entre tipos não compatíveis, é necessário converter explicitamente o tipo da variável ou variáveis antes da operação.  ([Python para Desenvolvedores](http://ark4n.files.wordpress.com/2010/01/python_para_desenvolvedores_2ed.pdf))
 
 
-### Sintaxe 
 
-#### Como é um programa em Python
-
-O Python utiliza a própria identação para a definição de blocos. No caso a [PEP8](http://legacy.python.org/dev/peps/pep-0008/) recomenda nunca usar o caracter de tabulação para fazer a codifição de dos blocos lógiso. Ao invés da tabulação recomendase configurar o editor de texto para se dar 4 espaços.
-  
-
-```
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# o caracter '#' tem a função de comentário de linha
-# fib.py - é um pequeno programa em python que retorna a sequencia de fibonacci  
-"""
-Fibonacci 
-"""
-def fib(valor):
-    resultado = []
-    a, b = 0, 1
-    while b <= valor:
-        resultado.append(b)
-        a, b = b, a+b
-    return resultado
-
-valor = int(raw_input("Digite o valor: "))
-print fib(valor)
-
-```
-
-<<<<<<< HEAD
-=======
 ### Tipagem dinâmica
 
 
@@ -366,13 +367,156 @@ Já no caso do mesmo código feito em Python, em todos os casos o interpretador 
 7
 ```
 
-### Tipos
-TODO: Numérico, Listas, Tuplas, Dicionário, String, Operadores Booleanos
-
 ### Sintaxe 
 
->>>>>>> 8e64ab05ae8291cbf367130066cc12b836ee7970
-#### Estruturas de controle
+Nota: Esta seção é adaptada do trabalho: ([Python para desenvolvedores](http://ark4n.wordpress.com/python/))
+
+O caractere # marca o inicio de comentário. Qualquer texto depois do # será ignorado até o fim da linha, com exceção dos comentários funcionais. 
+
+Comentários funcionais são usados para:
+- alterar a codificação do arquivo fonte do programa acrescentando um comentário com o texto “#-*- coding: <encoding> -*#-” 
+- definir o interpretador que será utilizado para rodar o programa em sistemas UNIX “#!” (#!/usr/bin/env python”)
+
+
+Exemplo de comentários funcionais:
+```
+#!/usr/bin/env python
+# -*- coding: latin1 -*-
+
+# Uma linha de código que mostra o resultado de 7 vezes 3
+print 7 * 3```
+
+Saída:
+
+```
+21
+
+```
+
+#### Bloco
+Nota: Esta seção é adaptada do trabalho: ([Python para desenvolvedores](http://ark4n.wordpress.com/python/))
+
+Em Python, os **blocos de código** são **delimitados pela indentação**, que deve ser constante no bloco de código, porém é considerada uma boa prática
+manter a consistência no projeto todo e evitar a mistura tabulações e espaços. A [PEP8](http://legacy.python.org/dev/peps/pep-0008/), recomendação oficial de estilo de codificação, recomenda o uso de 4 espaços. 
+
+> É importante configurar o editor de textos para tabular com espaços ao invés do caracter de tabulação. 
+
+```
+Instruçoes
+Enquanto condição:
+....Instruções
+....Se condição:
+........Instruções
+....Senão:
+........Instruções
+Instruções
+```
+ 
+
+#### Estruturas de controle e repetição
+
+
+Condicional
+
+```
+if <condição>:
+    <bloco de código>
+elif <condição>:
+    <bloco de código>
+elif <condição>:
+    <bloco de código>
+else:
+    <bloco de código>```
+
+1. <condição>: sentença que possa ser avaliada como verdadeira ou falsa
+2. <bloco de código>: sequência de linhas de comando.
+3. As clausulas elif e else são opcionais e podem existir vários elifs para o mesmo if, porém apenas um else ao final.
+4. Parênteses só são necessários para evitar ambiguidades
+Exemplo:
+```
+temp = int(raw_input('Entre com a temperatura: '))
+
+if temp < 0:
+    print 'Congelando...'
+elif 0 <= temp <= 20:
+    print 'Frio'
+elif 21 <= temp <= 25:
+    print 'Normal'
+elif 26 <= temp <= 35:
+    print 'Quente'
+else:
+    print 'Muito quente!'
+```
+
+Saída:
+
+```
+Entre com a temperatura: 23
+Normal
+```
+
+Se o bloco de código for composto de apenas uma linha, ele pode ser escrito após os dois pontos:
+
+```
+if temp < 0: print 'Congelando...'
+```
+
+O python suporta a seguinte estrutura:
+
+```
+<variável> = <valor 1> if <condição> else <valor 2>
+```
+
+
+#### Funções
+
+
+
+#### Como é um programa em Python
+
+O Python utiliza a própria identação para a definição de blocos. No caso a [PEP8](http://legacy.python.org/dev/peps/pep-0008/) recomenda nunca usar o caracter de tabulação para fazer a codifição de dos blocos lógiso. Ao invés da tabulação recomendase configurar o editor de texto para se dar 4 espaços.
+  
+
+```
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# o caracter '#' tem a função de comentário de linha
+# fib.py - é um pequeno programa em python que retorna a sequencia de fibonacci  
+"""
+Fibonacci 
+"""
+def fib(valor):
+    resultado = []
+    a, b = 0, 1
+    while b <= valor:
+        resultado.append(b)
+        a, b = b, a+b
+    return resultado
+
+valor = int(raw_input("Digite o valor: "))
+print fib(valor)
+
+```
+
+
+
+### Exercícios 1 
+
+
+ 
+Nota: Exercícios retirados do livro [Python para desenvolvedores](http://ark4n.wordpress.com/python/)
+
+1. Implementar duas funções:
+	1. Uma que converta temperatura em graus Celsius para Fahrenheit.
+	1. Outra que converta temperatura em graus Fahrenheit para Celsius.
+		> c = (5*(f-32)/9)
+		
+		> f = (9/5*c+32)
+1. Implementar uma função que retorne verdadeiro se o número for primo (falso caso contrário). Testar de 1 a 100.
+1. Implementar uma função que receba uma lista de inteiros e retorne a soma e a média dos valores. (Questão adaptada)
+1. Crie uma função que:	1. Receba uma lista de tuplas (dados), um inteiro (chave, zero por padrão igual) e um booleano (reverso, falso por padrão).
+1.  Responda o que é tipagem forte e como isso influência na detecção de erros. (Exercício não tirado do livro)
+
 
 #### Orientação a Ojetos
 ##### Métodos Especiais
@@ -386,6 +530,8 @@ TODO: Explicar como são os módulos.
 
 TODO: Apresentar os principais módulos da linugagem Python.
 
+
+		
 
 ## Djanto
 
