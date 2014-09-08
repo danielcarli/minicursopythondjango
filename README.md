@@ -845,11 +845,23 @@ Saída:
 "The Lamb Lies Down On Broadway" - "Down " = "The Lamb Lies On Broadway"
 ```
 
+#### Exercícios 2
 
-##### Meta Classes
+Nota para resolver o exercício:
+> 1. Crie um pacote para o projeto "universidade"
+> 2. Crie um módulo chamado "Pessoas.py" (Crie as classes dentro deste arquivo)
+> 3. Crie um arquivo separado chamado "principal.py" (Importe as classes e faça os testes neste arquivo) 
 
 
-		
+1. Crie uma classe Pessoa com os atributos nome e idade
+	1. Sobre escreva o operador == para saber se duas pessoas são iguais. Serão considerados a mesma pessoa se tiverem o mesmo nome e idade.
+	2 Crie uma lista com 5 pessoas compare ser se alguma pessoa aparece mais de uma vez. 	
+2. Crie duas classes derivadas de pessoa: Aluno e Professo. 
+	1. O aluno deve possuir os atributos matricula e ter uma lista de disciplinas matriculadas. 
+	2. O progressor deve possuir uma lista de livros de bibliografia básica. 
+	3. Crie 4 alunos e 2 professores.
+
+
 
 ## Django
 
