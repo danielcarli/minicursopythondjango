@@ -38,7 +38,7 @@ Histórico:
 
 Versões:
 
-- **2.7** foi lançado no meio de 201. Essa é considerada a última versão da série 2.x.
+- **2.7** foi lançado no meio de 2010. Essa é considerada a última versão da série 2.x.
 - **3.0** foi lançada em 2008. A versão  mais recente é a **3.4** de 2014. Ela quebra retrocompatibilidade com a série 2.
 
 
