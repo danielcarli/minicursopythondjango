@@ -762,15 +762,91 @@ O arquivo **"\_\_init\_\_.py" pode estar vazioou conter código de inicializac�
 
 
 #### Orientação a Ojetos
+##### Classes
+Nota: Esta seção é adaptada do trabalho: ([Python para desenvolvedores](http://ark4n.wordpress.com/python/))
+
+A classe é a estrutura básica do paradigma de orientação a objetos, que representa o tipo do objeto, um modelo a partir do qual os objetos serão criados. Objetos são abstrações computacionais que representam entidades, com suas qualidades (atributos) e ações (métodos) que estas podem realizar. 
+
+sintaxe:
+
+```
+# -*- coding: utf-8 -*-
+# Classe.py
+
+class Classe(supcl1, supcl2): 
+	"""	Isto é uma classe 	"""	clsvar = []
+		def __init__(self, args): 		"""		Inicializador da classe 		"""		<bloco de código>	def __done__(self): 		"""		Destrutor da classe 		"""		<bloco de código>
+			def metodo(self, params): 		"""		Método de objeto 		"""		<bloco de código>	@classmethod	def cls_metodo(cls, params): 		"""		Método de classe 		"""
+		<bloco de código>	@staticmethod	def est_metodo(params):		"""		Método estático 		"""		<bloco de código>
+
+
+obj = Classe() 
+obj.metodo()Classe.cls_metodo() Classe.est_metodo()
+
+```
+
+Métodos de objeto podem usar atributos e outros métodos do objeto. A variável self, que representa o objeto e também precisa ser passado de forma explícita. O nome self é uma convenção, assim como cls, podendo ser trocado por outro nome qualquer, porém é considerada como boa prática manter o nome.
+
+Métodos estáticos são aqueles que não tem ligação com atributos do objeto ou da classe. Funcionam como as funções comuns.
+
+
 ##### Métodos Especiais
+
+Métodos especiais são identificados por nomes no padrão \_\_metodo\_\_() (dois sublinhados no início e no final do nome) e definem como os objetos derivados da classe se comportarão em situações particulares, como em sobrecarga de operadores.
+
+
 ##### Herança Simples
-##### Herança Múltipla
+
+Herança é um mecanismo que a orientação a objeto provê, com objetivo de facilitar o reaproveitamento de código. A ideia é que as classes sejam construídas formando uma hierarquia.
+
+A forma comum de herança é chamada de herança simples, na qual a nova classe é derivada de apenas uma classe já existente, porém é possível criar várias classes derivadas, criando uma hierarquia de classes.
+
+Exemplo:
+
+```
+class Pendrive(object):    def __init__(self, tamanho, interface='2.0'):        self.tamanho = tamanho 
+        self.interface = interfaceclass MP3Player(Pendrive):    def __init__(self, tamanho, interface='2.0', turner=False):        self.turner = turner        Pendrive.__init__(self, tamanho, interface)
+       mp3 = MP3Player(1024)print '%s\n%s\n%s' % (mp3.tamanho, mp3.interface, mp3.turner)
+```
+
+Saída:
+```
+1024 
+2.0 
+False
+```
+
+
 ##### Sobrecarga de operadores
+
+No Python, o comportamento dos operadores é definido por métodos especiais, porém tais métodos só podem ser alterados nas classes abertas. Por convenção, os métodos especiais têm nomes que começam e terminam com “__”.
+
+
+| Operador     | Método          | Operação     |
+| ------------ | --------------- | ------------ |
+| +            | \_\_add\_\_     | Adição       |
+| -            | \_\_sub\_\_     | Subtração    |
+| *            | \_\_multi\_\_   | Multiplicação|
+| /            | \_\_div\_\_     | Divisão      |
+| ==           | \_\_eq\_\_      | Igual a      |
+| <=           | \_\_le\_\_      | Meno ou igual|
+| >=           | \_\_ge\_\_      | Maior ou igual |
+| <            | \_\_le\_\_      | Menor que    |
+| >            | \_\_lt\_\_      | Maior que    |
+| !=           | \_\_ne\_\_      | Diferente    |
+
+Existem mais operadores ver lista em ([Python para desenvolvedores](http://ark4n.wordpress.com/python/)).
+
+```
+# A classe String deriva de strclass String(str):    def __sub__(self, s):        return self.replace(s, '')s1 = String('The Lamb Lies Down On Broadway')s2 = 'Down 'print '"%s" - "%s" = "%s"' % (s1, s2, s1 - s2)```
+
+Saída:
+```
+"The Lamb Lies Down On Broadway" - "Down " = "The Lamb Lies On Broadway"
+```
+
+
 ##### Meta Classes
-
-TODO: Explicar como são os módulos.
-
-TODO: Apresentar os principais módulos da linugagem Python.
 
 
 		
