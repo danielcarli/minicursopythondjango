@@ -71,7 +71,9 @@ Versões:
 - Pixar
 - The Walt Disney Company 
 - Call of Duty 4 (Moder Warfare)
-
+- globo.com 
+- Universidade Federal De Santa Maria - ufsm.br
+- muitos outros
 
 Nota: Parte do conteúdo desta seção (Quem usa python) foi retirado do curto [Python para Zumbis do Fernando Masanori](http://pycursos.com/python-para-zumbis/). 
 
