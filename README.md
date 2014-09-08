@@ -533,7 +533,7 @@ TODO: Apresentar os principais módulos da linugagem Python.
 
 		
 
-## Djanto
+## Django
 
 ### Criando um projeto
 
