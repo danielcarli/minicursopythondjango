@@ -1268,8 +1268,110 @@ datetime.datetime(2014, 9, 10, 4, 44, 39, 751061, tzinfo=<UTC>)
 
 >>> Enquete.objects.all()
 [<Enquete: Enquete object>]
+```
+
+O retorno <Enquete: Enquete Object> é, de forma geral, é inútil para representar o objeto em questão. Vamos arrumar isso editando os nossos modelos da aplicação **enquetes** (enquetes/models.py) e vamos adicionar o método __unicode__() para Enquete e Escolha. NOTA: No Python 3 substitua __unicode__ por __str__. Siga o exemplo a seguir:
 
 ```
+from django.db import models
+
+class Enquete(models.Model):
+    # ...
+
+    def __unicode__(self):  # Python 3: def __str__(self):
+        return self.questao
+
+
+class Escolha(models.Model):
+    # ...
+
+    def __unicode__(self):  # Python 3: def __str__(self):
+        return self.texto_da_escolha
+
+```
+
+Agora vamos adicionar um método personalizado para demostrar essa possibilidade. 
+
+```
+import datetime
+from django.utils import timezone
+#
+
+class Enquete(models.Model):
+    # ...
+
+    def foi_publicado_recentemente(self):
+        return self.data_de_publicacao >= timezone.now() - datetime.timedelta(days=1)
+``` 
+
+Salve as modificações e inicie um novo shell interativo em Python usando o comando **python manage.py shell**.
+
+
+```
+>>> from enquetes.models import Enquete, Escolha
+
+# Tenha certeza que a função __unicode__() foi adicionada e funciona.
+>>> Enquete.objects.all()
+[<Enquete: E ae?>]
+
+# O Django prove uma API de pesquisa muito rica e completamente 
+# dirigida por argumentos chaves.
+>>> Enquete.objects.filter(id=1)
+[<Enquete: E ae?>]
+>>> Enquete.objects.filter(questao__startswith='E a')
+[<Enquete: E ae?>]
+
+# Vamos pegar a enquete que foi publicada este ano
+>>> from django.utils import timezone
+>>> ano_atual = timezone.now().year
+>>> Enquete.objects.get(data_de_publicacao__year=ano_atual)
+<Enquete: E ae?>
+
+# Requerer um ID que não existe irá levantar uma exceção.
+>>> Enquete.objects.get(id=2)
+Traceback (most recent call last):
+  ...
+DoesNotExist: Enquete matching query does not exist.
+
+# Vamos verificar que a nosso método personalizado funcionou
+>>> e = Enquete.objects.get(id=1)
+>>> e.foi_publicado_recentemente()
+True
+
+# Vamos mostrar as escolhas que estão setadas para o nosso objeto
+>>> e.escolha_set.all()
+[]
+
+# criando uma escolha.
+>>> e.escolha_set.create(texto_da_escolha=u"Não muito", votos=0) 
+<Escolha: Não muito>
+>>> e.escolha_set.create(texto_da_escolha=u"O ceu", votos=0)
+<Escolha: O ceu>
+>>> es = e.escolha_set.create(texto_da_escolha=u"Apenas hackeando novamente")
+
+# O objeto Escolha tem uma APT de acesso ao objeto Enquete associado.
+>>> es.enquete
+<Enquete: E ae?>
+
+# E ao contrário também é possível. A Enquete tem acesso a todas as Escolhas.
+>>> e.escolha_set.all()
+[<Escolha: Não muito>, <Escolha: O ceu>, <Escolha: Apenas hackeando novamente>]
+>>> e.escolha_set.count()
+3
+
+# Além disso a API automaticamente segue a relações que você precisa.
+# use underscore duplo para separar a relação
+# Isso funciona em tantos níveis de profundidade quanto você quiser. Não existe limite.
+# Econtre todas as escolhas em que a enquete foi publicada neste ano.
+>>> Escolha.objects.filter(enquete__data_de_publicacao__year=ano_atual)
+[<Escolha: Não muito>, <Escolha: O ceu>, <Escolha: Apenas hackeando novamente>]
+
+# Vamos apagar uma escolha usando o comando delete().
+>>> es
+[<Escolha: Apenas hackeando novamente>]
+>>> es.delete()
+```
+
 
 ### Conhecendo o painel administrativo do Django 
 
@@ -1298,10 +1400,10 @@ USE_TZ = False
 - Verifique se o banco de dados é o SQLite
 - Mantendo as apliações que já estão definidas, sincronize o projeto com o banco de dados.
 - Crie duas aplicações
-    - perfies
+    - perfis
     - postagens
 
-- Na aplicação **perfies** defina os seguintes campos:
+- Na aplicação **perfis** defina os seguintes campos:
     - nome_cidade: charfield com tamanho máximo de 32 caracteres
     - usuario: sendo esse uma ForeignKey para ->  from django.contrib.auth.models import User. Definir o atributo **related_name** para related_name='perfil'  
     - foto: ImageFiel para fazer upload para "perfis/%Y/%m/%d/%h"
@@ -1316,7 +1418,7 @@ USE_TZ = False
 
 
 ```
-# talvez precise do summetrical = False
+# talvez precise do symmetrical = False
 
  follow = models.ManyToManyField('self', symmetrical=False, related_name='user_follow')
     followed_by = models.ManyToManyField('self', symmetrical=False, blank=True , related_name='user_followed_by')
