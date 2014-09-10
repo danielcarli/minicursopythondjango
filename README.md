@@ -100,7 +100,8 @@ O termo Pythonic é usado para indicar que algo é compatível com as premissas 
 **The Zen of Python**:
 
 ```
->>> import thisThe Zen of Python, by Tim Peters
+>>> import this
+The Zen of Python, by Tim Peters
 
 Beautiful is better than ugly.
 Explicit is better than implicit.
@@ -120,7 +121,8 @@ Now is better than never.
 Although never is often better than *right* now.
 If the implementation is hard to explain, it's a bad idea.
 If the implementation is easy to explain, it may be a good idea.
-Namespaces are one honking great idea -- let's do more of those!```
+Namespaces are one honking great idea -- let's do more of those!
+```
 
 
 ### Variáveis e Tipos
@@ -143,7 +145,8 @@ Uma variável, dentro de um programa, é uma posição na memória que armazena 
 
 Os tipo de dados em Python podem ser:
 
-1. **Mutáveis**: permitem que os conteúdos das variáveis sejam alterados.1. **Imutáveis**: não permitem que os conteúdos das variáveis sejam alterados.
+1. **Mutáveis**: permitem que os conteúdos das variáveis sejam alterados.
+1. **Imutáveis**: não permitem que os conteúdos das variáveis sejam alterados.
 
 
 Uma variável em Python sempre deve ser inicializada. Ou seja, sempre que ela foi 
@@ -387,7 +390,8 @@ Exemplo de comentários funcionais:
 # -*- coding: latin1 -*-
 
 # Uma linha de código que mostra o resultado de 7 vezes 3
-print 7 * 3```
+print 7 * 3
+```
 
 Saída:
 
@@ -425,14 +429,15 @@ elif <condição>:
 elif <condição>:
     <bloco de código>
 else:
-    <bloco de código>```
+    <bloco de código>
+```
 
 1. <condição>: sentença que possa ser avaliada como verdadeira ou falsa
 2. <bloco de código>: sequência de linhas de comando.
 3. As clausulas elif e else são opcionais e podem existir vários elifs para o mesmo if, porém apenas um else ao final.
 4. Parênteses só são necessários para evitar ambiguidades
-Exemplo:
-```
+Exemplo:
+```
 temp = int(raw_input('Entre com a temperatura: '))
 
 if temp < 0:
@@ -610,14 +615,25 @@ Saída:
 Exemplo (Conversão de RGB):
 
 ```
-# -*- coding: utf-8 -*-def rgb_html(r=0, g=0, b=0): 
+# -*- coding: utf-8 -*-
+
+def rgb_html(r=0, g=0, b=0): 
     """
     Converte R, G, B em #RRGGBB
-    """    return '#%02x%02x%02x' % (r, g, b) 
-def html_rgb(color='#000000'):    """    Converte #RRGGBB em R, G, B    """    if color.startswith('#'): 
-        color = color[1:]        r = int(color[:2], 16) 
+    """
+    return '#%02x%02x%02x' % (r, g, b) 
+def html_rgb(color='#000000'):
+    """
+    Converte #RRGGBB em R, G, B
+    """
+    if color.startswith('#'): 
+        color = color[1:]
+        r = int(color[:2], 16) 
         g = int(color[2:4], 16) 
-        b = int(color[4:], 16)    return r, g, b # Uma sequênciaprint rgb_html(200, 200, 255)
+        b = int(color[4:], 16)
+    return r, g, b # Uma sequência
+
+print rgb_html(200, 200, 255)
 print rgb_html(b=200, g=200, r=255) # O que houve? 
 print html_rgb('#c8c8ff')
 ```
@@ -633,9 +649,15 @@ Saída:
 Exemplo de como receber todos parâmetros:
 
 ```
-# -*- coding: utf-8 -*-# *args - argumentos sem nome (lista)# **kargs - argumentos com nome (dicionário)def func(*args, **kargs):     print args
+# -*- coding: utf-8 -*-
+# *args - argumentos sem nome (lista)
+# **kargs - argumentos com nome (dicionário)
+
+def func(*args, **kargs): 
+    print args
     print kargs
-    func('peso', 10, unidade='k')
+    
+func('peso', 10, unidade='k')
 ```
 
 Saída:
@@ -670,7 +692,8 @@ Nota: Exercícios retirados do livro [Python para desenvolvedores](http://ark4n.
 		> f = (9/5*c+32)
 1. Implementar uma função que retorne verdadeiro se o número for primo (falso caso contrário). Testar de 1 a 100.
 1. Implementar uma função que receba uma lista de inteiros e retorne a soma e a média dos valores. (Questão adaptada)
-1. Crie uma função que:	1. Receba uma lista de tuplas (dados), um inteiro (chave, zero por padrão igual) e um booleano (reverso, falso por padrão).
+1. Crie uma função que:
+	1. Receba uma lista de tuplas (dados), um inteiro (chave, zero por padrão igual) e um booleano (reverso, falso por padrão).
 1.  Responda o que é tipagem forte e como isso influência na detecção de erros. (Exercício não tirado do livro)
 
 > **Números primos** são os números naturais que têm apenas dois divisores diferentes: o 1 e ele mesmo.
@@ -771,14 +794,48 @@ sintaxe:
 # Classe.py
 
 class Classe(supcl1, supcl2): 
-	"""	Isto é uma classe 	"""	clsvar = []
-		def __init__(self, args): 		"""		Inicializador da classe 		"""		<bloco de código>	def __done__(self): 		"""		Destrutor da classe 		"""		<bloco de código>
-			def metodo(self, params): 		"""		Método de objeto 		"""		<bloco de código>	@classmethod	def cls_metodo(cls, params): 		"""		Método de classe 		"""
-		<bloco de código>	@staticmethod	def est_metodo(params):		"""		Método estático 		"""		<bloco de código>
+	"""
+	Isto é uma classe 
+	"""
+	clsvar = []
+	
+	def __init__(self, args): 
+		"""
+		Inicializador da classe 
+		"""
+		<bloco de código>
+
+	def __done__(self): 
+		"""
+		Destrutor da classe 
+		"""
+		<bloco de código>
+		
+	def metodo(self, params): 
+		"""
+		Método de objeto 
+		"""
+		<bloco de código>
+
+	@classmethod
+	def cls_metodo(cls, params): 
+		"""
+		Método de classe 
+		"""
+		<bloco de código>
+
+	@staticmethod
+	def est_metodo(params):
+		"""
+		Método estático 
+		"""
+		<bloco de código>
 
 
 obj = Classe() 
-obj.metodo()Classe.cls_metodo() Classe.est_metodo()
+obj.metodo()
+Classe.cls_metodo() 
+Classe.est_metodo()
 
 ```
 
@@ -801,9 +858,18 @@ A forma comum de herança é chamada de herança simples, na qual a nova clas
 Exemplo:
 
 ```
-class Pendrive(object):    def __init__(self, tamanho, interface='2.0'):        self.tamanho = tamanho 
-        self.interface = interfaceclass MP3Player(Pendrive):    def __init__(self, tamanho, interface='2.0', turner=False):        self.turner = turner        Pendrive.__init__(self, tamanho, interface)
-       mp3 = MP3Player(1024)print '%s\n%s\n%s' % (mp3.tamanho, mp3.interface, mp3.turner)
+class Pendrive(object):
+    def __init__(self, tamanho, interface='2.0'):
+        self.tamanho = tamanho 
+        self.interface = interface
+
+class MP3Player(Pendrive):
+    def __init__(self, tamanho, interface='2.0', turner=False):
+        self.turner = turner
+        Pendrive.__init__(self, tamanho, interface)
+       
+mp3 = MP3Player(1024)
+print '%s\n%s\n%s' % (mp3.tamanho, mp3.interface, mp3.turner)
 ```
 
 Saída:
@@ -828,14 +894,23 @@ No Python, o comportamento dos operadores é definido por métodos especiais, 
 | ==           | \_\_eq\_\_      | Igual a      |
 | <=           | \_\_le\_\_      | Meno ou igual|
 | >=           | \_\_ge\_\_      | Maior ou igual |
-| <            | \_\_le\_\_      | Menor que    |
-| >            | \_\_lt\_\_      | Maior que    |
+| <            | \_\_lt\_\_      | Menor que    |
+| >            | \_\_gt\_\_      | Maior que    |
 | !=           | \_\_ne\_\_      | Diferente    |
 
 Existem mais operadores ver lista em ([Python para desenvolvedores](http://ark4n.wordpress.com/python/)).
 
 ```
-# A classe String deriva de strclass String(str):    def __sub__(self, s):        return self.replace(s, '')s1 = String('The Lamb Lies Down On Broadway')s2 = 'Down 'print '"%s" - "%s" = "%s"' % (s1, s2, s1 - s2)```
+# A classe String deriva de str
+class String(str):
+    def __sub__(self, s):
+        return self.replace(s, '')
+
+s1 = String('The Lamb Lies Down On Broadway')
+s2 = 'Down '
+
+print '"%s" - "%s" = "%s"' % (s1, s2, s1 - s2)
+```
 
 Saída:
 ```
@@ -862,19 +937,341 @@ Nota para resolver o exercício:
 
 ## Django
 
+A seção sobre django foi baseada na [documentação oficial](https://docs.djangoproject.com/en/1.6/intro/tutorial01/).
+
+Vamos assumir que você já tenha o django instalado em sua máquina. Esse tutorial vai considerar o django 1.6. Apesar disso, acredito que tudo que está aqui irá funcionar na versão 1.7  sem nenhum impedimento. 
+
+Vamos considerar duas partes: 
+
+- A parte **pública do site**;
+- A parte **administrativa**.
+
 ### Criando um projeto
+
+Vamos iniciar a criação do projeto em **Django** usando um aplicativo escrito em python que nos gera a estrutura básica do projeto. Ele nos gera uma coleção de configurações para uma instancia do Django, incluíndo configuração do banco de dados, algumas opções específicas do Django e configurações de aplicativos.
+
+```
+django-admin.py startproject meusite
+``` 
+
+> Você deve evitar usar nomes que conflitem com outros aplicativos ou bibliotecas, como no caso de usar o nome _django_ ou _test_.
+
+O projeto criato possui a seguinte estrutura:
+
+```
+meusite/
+    manage.py
+    meusite/
+        __init__.py
+        settings.py
+        urls.py
+        wsgi.py
+``` 
+
+Algumas considerações:
+
+- A pasta _meusite_ mais externa apenas armazena o seu projeto. 
+- _manage.py_ é um script de linha de comando que ajuda você interagir com o seu projeto em diversas formas.
+- A parta _meusite_  mais interna é um pacote Python do seu projeto. 
+- meusite/__init__.py apenas define esse diretórico como um pacote Python válido.
+- meusite/settings.py é o arquivo de configuração do projeto.
+- meusite/urls.py contém as declações das urls desse projeto Django. Podemos considerar como o "índice" do seu projeto.
+- meusite/wsgi.py é um ponto de entrada para deploy da aplicação para servidores conpatives com WSGI. 
+
 
 ### Servidor de desenvolvimento
 
+Dentro do diretório base do seu projeto execute o comando: 
+
+```
+python manage.py runserver
+```
+
+Você irá perceber a seguinte saída:
+
+```
+Validating models...
+
+0 errors found
+September 10, 2014 - 02:45:52
+Django version 1.6.5, using settings 'meusite.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+
+```
+
+Você acabou de iniciar o servidor de desenvolvimento web do Django. Ele é um servidor web puramente escrito em Python. Ele foi adicionando ao Django para permitir que o desenvolvedor possa se preocupar com a construção de seu projeto de forma rápida sem ter que lidar com as configurações de um servidor de produção - tal como o Apache - até ter que colocar o projeto em produção.
+
+>  Não use esse serivodr embarcado para executar nada em produção. Ele foi adicionado apenas por conveniência para o desenvolvimento. 
+
+Agora que o servidor está rodando visite http://127.0.0.1:8000/ em seu navegador. Você receberá uma tela de boas vindas do Django. 
+
+Trocando a porta e o ip do servidor de desenvolvimento:
+
+```
+python manage.py runserver 8080
+```
+
+```
+python manage.py runserver 0.0.0.0:8000
+```
+
 ### Configuração do banco de dados
+
+Agora é hora de irmos trabalhar com o nosso arquivo de configuração **meusite/settings.py**. 
+
+Por padrão a configuração utiliza  o SQLite. Para inicar a desenvolver e conhecer Django essa é maneira mais fácil. SQLite é incluído no Python, dessa forma você não precisa instalar nada para dar suporte ao seu banco de dados. 
+
+```
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+```
+
+- **ENGINE**:  representa o drive do Django responsável por conectar no banco de dados e dar suporte ao ORM. Pode ser:  'django.db.backends.sqlite3', 'django.db.backends.postgresql_psycopg2', 'django.db.backends.mysql' ou 'django.db.backends.oracle'. Existem outros bancos disponíveis. 
+- **NAME**: O nome do seu banco de dados. No caso do SQLite ele será um arquivo em seu computador. Sendo o SQLite, é necessário que essa variável possua o endereço completo até o arquivo. 
+
+Se você não estiver usando o SQLite como seu banco de dados será necessário adicionar **USER**, **PASSWORD** e **HOST**.
+
+No caso precisa trocar a lingua da nossa aplicação. Também não vamos usar timezone. Dessa forma, vamos setar essas variáveis da seguinte maneira: 
+
+```
+LANGUAGE_CODE = 'pt-br'
+
+USE_TZ = False 
+```
+
+As outras definções vamos deixar da forma que estão.
+
+Note que existe uma tupla chamada INSTALLED_APPS. Ela contém o nome das aplicações em Django que estarão ativas para essa instância do Django. Aplicações podem ser utilizadas em múltiplos projetos e você pode distribuir elas para outros usuários utilizarem em seus projetos. 
+
+Por padrão o chando ativa os seguintes apps:
+
+- django.contrib.admin
+- django.contrib.auth
+- django.contrib.contenttypes 
+- django.contrib.sessions
+- django.contrib.messages
+- django.contrib.staticfiles
+
+Esses aplicativos são incluídos por padrão como conveniência para os casos mais comuns. 
+
+
+Para criar as tabelas do banco de dados, vamos utilizar o seguinte comando:
+
+```
+python manage.py syncdb
+```
+
+Esse comando confere as aplicações que estão definidas na variável **INSTALLED_APPS** do settings e cria as tabelas necessárias. 
+
 
 ### Criando modelos
 
+Cada aplaicação que você escreve em Django consiste em um pacote que segue uma certa convensão.  O Django vem com uma ferramenta que constrói o diretório e a estrutura base da aplicação.
+
+Para criar a sua aplicação nós vamos executar o seguinte comando:
+
+```
+python manage.py startapp enquetes
+```
+
+Ele irá criar um diretório **enquetes** que contém:
+
+```
+enquetes/
+    __init__.py
+    admin.py
+    models.py
+    tests.py
+    views.py
+```
+
+Essa estrutura de diretórios irá abrigar a sua aplicação. 
+
+A primeira coisa em escrever um aplicativo web que acesso o banco de dados em Django é definir o modelo. Basicamente o modelo contém o layout do seu banco de dados com metadados adicionais. 
+
+> Filosofia:
+> Um modelo é a única e definitiva fonte de especificaço dos seus dados. Ele contém os campos e o comportamento dos dados que você está armazenando. O Django segue o princípio [DRY (Don’t repeat yourself)](https://docs.djangoproject.com/en/1.6/misc/design-philosophies/#dry). O objetivo é definir o modelo de dados em um local e derivar as coisas automaticamente dai.
+
+Em nosso exemplo nós iremos criar dois modelos: **Enquete** e **Escolha**. 
+
+```
+# coding: utf-8
+from django.db import models 
+
+class Enquete(models.Model):
+    questao = models.CharField(max_length=200)
+    data_de_pubicacao = models.DateTimeField(u'Date de publicação')
+
+class Escolha(models.Model):
+    enquete = models.ForeignKey(Enquete)
+    texto_da_escolha = models.CharField(max_length=200)
+    votos = models.IntegerField(default=0)
+
+```
+
+O código é direto. Cada modelo é representado por uma classe que herda 
+**django.db.models.Model**. Cada modelos tem um número de variáveis de classe, cada um representa um campo do bando de dados no modelo.
+
+Cada campo é representado por uma instância de **Field**, por exemplo: **CharField** para campos de caracteres e **DateTimeField** para data e hora. Isso informa ao Django qual é o tipo de dados de cada campo.
+
+A opção **max_length** definie o tamanho máximo que o campo CharField consegue armazenar. 
+
+A opcão **default** define o valor inicial. Nesse caso nós definimos como 0 o valor inicial para o número de votos. 
+
+Finalmente, a relação entre as classes é feita através do campo **ForeignKey**. Isso informa ao Django que cada **Escolha** está relacionada a apenas uma **Enquete**. 
+
+Algúns dos campos mais utilizados:
+
+- models.BooleanField()
+- models.CharField()
+- models.DateTimeField()
+- models.EmailField()
+- models.FileField()
+- models.FloatField()
+- models.ImageField()
+- models.IntegerField()
+- models.IPAddressField()
+- models.PositiveIntegerField()
+- models.TextField()
+- models.URLField()
+- models.ForeignKey()
+- models.ManyToManyField()
+
+
+Algumas das opções mais utilizadas para configurar um campo:
+
+- null
+- max_length (CharField e outros)
+- blank
+- choices
+- default
+- help_text
+- unique
+- verbose_name
+- auto_now_add (DateTimeField e outros)
+- upload_to (ImageField, FileField e outros)
+
+
 ### Ativando os modelos
+
+Um pouco de código do modelos provê o Django com muita informação. Com isso o Django é acapaz de:
+
+- Criar o schema do banco de dados (CREATE TABLE ...)
+- Criar uma API de acesso aso dados em Python através dos objetos **Enquete** e **Escolha**.
+
+Mas primeiro é necessário informar o nosso projeto que a aplicação *enquetes** está instalada. Para fazer isso basta adicionar o _settings.py_ e adicionar no final da tupla INSTALLED_APPS o item "enquetes".
+
+```
+INSTALLED_APPS = (
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'enquetes',
+)
+
+```
+
+Agora que temos a aplicação **enquetes** instalados, vamos executar o comando:
+
+```
+python manage.py sql enquetes
+```
+
+Você deve ver algo similar com o seguinte código sql:
+
+```
+BEGIN;
+CREATE TABLE "enquetes_enquete" (
+    "id" integer NOT NULL PRIMARY KEY,
+    "questao" varchar(200) NOT NULL,
+    "data_de_publicacao" datetime NOT NULL
+)
+;
+CREATE TABLE "enquetes_escolha" (
+    "id" integer NOT NULL PRIMARY KEY,
+    "enquete_id" integer NOT NULL REFERENCES "enquetes_enquete" ("id"),
+    "texto_da_escolha" varchar(200) NOT NULL,
+    "votos" integer NOT NULL
+)
+;
+
+COMMIT;
+
+```
+
+Perceba o seguinte:
+
+- O nome das tabelas irá ser gerado automaticamente da combinação do nome da aplicação (enquetes) com o nome do modelo - enquete e escolhas.
+- A chave primária é automaticamente gerada.
+- Por convensão o Django adiciona "_id" ao nome do campo da chave estrangeira.
+- O comando **sql** não executa esse código **SQL** em sua base de dados. Apenas imprime na tela o SQL que o Django cria. 
+
+
+Agora vamos sincronizar os nossos modelos com o bando de dados. Execute o comando:
+
+```
+python manage.py syncdb
+```
+
+O comando **syncdb** executará a sincronização do banco de dados apenas para as aplicações que ainda não foram sincronizadas. 
+
 
 ### Brincando com a API
 
-### Conhecendo o painel administrativo do Django (Apenas introdutório)
+Agora vamos nos dirigir ao interpretador python do django. Use o comando:
+
+```
+python manage.py shell
+```
+
+Nós estamos utilizando o shell do django apenas por que ele já adiciona nas variáveis de ambiente as aplicações instaladas no nosso arquivo **meusite/settings.py**.
+
+```
+>>> from enquetes.models import Enquete, Escolha
+>>> 
+>>> Enquete.objects.all()
+[]
+
+# Vamos criar uma enquete.
+>>> from django.utils import timezone
+>>> e = Enquete(questao=u"Qual é a novidade?", data_de_publicacao=timezone.now())
+
+# Salve a enquete no banco.
+>>> e.save()
+
+# Após a execução do método save nós podemos verificar que a nossa enquete possui
+# um id.
+>>> e.id
+1
+
+# verificando qual é a questão
+>>> e.questao
+u'Qual \xe9 a novidade?'
+
+# verificando a data de publicação
+>>> e.data_de_publicacao
+datetime.datetime(2014, 9, 10, 4, 44, 39, 751061, tzinfo=<UTC>)
+
+# Mudando o atributo e salvando no banco de dados usando o método save()
+>>> e.questao = "E ae?"
+>>> e.save()
+
+# objects.all() mostra todas as enquetes que estão armazenadas no banco de dados
+
+>>> Enquete.objects.all()
+[<Enquete: Enquete object>]
+
+```
+
+### Conhecendo o painel administrativo do Django 
 
 ### Escreva a sua primeira View (Rotas)
 
@@ -889,8 +1286,41 @@ Nota para resolver o exercício:
 
 
 
+## Exercício Final:
+
+Crie um projeto chamado **socialsati**.
+- Defina as configurações:
+```
+LANGUAGE_CODE = 'pt-br'
+
+USE_TZ = False 
+```
+- Verifique se o banco de dados é o SQLite
+- Mantendo as apliações que já estão definidas, sincronize o projeto com o banco de dados.
+- Crie duas aplicações
+    - perfies
+    - postagens
+
+- Na aplicação **perfies** defina os seguintes campos:
+    - nome_cidade: charfield com tamanho máximo de 32 caracteres
+    - usuario: sendo esse uma ForeignKey para ->  from django.contrib.auth.models import User. Definir o atributo **related_name** para related_name='perfil'  
+    - foto: ImageFiel para fazer upload para "perfis/%Y/%m/%d/%h"
+    - seguindo: sendo um campo ManyToMany para from django.contrib.auth.models import User. Definir o atributo **related_name** para related_name='seguido'
+
+- Na aplicação **postagens** defina os seguintes campos:
+    - postado_por: Sendo esse uma ForeignKey para ->  from django.contrib.auth.models import User.
+    - conteudo: Sendo um CharField que aceita no máximo de 140 caracteres. 
+    - data: adicione a esse campo o auto_now_add=True
 
 
+
+
+```
+# talvez precise do summetrical = False
+
+ follow = models.ManyToManyField('self', symmetrical=False, related_name='user_follow')
+    followed_by = models.ManyToManyField('self', symmetrical=False, blank=True , related_name='user_followed_by')
+```
 
  
 
