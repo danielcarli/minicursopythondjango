@@ -1,5 +1,8 @@
+# -*-  coding: utf-8 -*-
+# @Author Daniel Michelon De Carli<daniel.de.carli@gmail.com>
+
 from django.contrib import admin
-from perfis.models import Perfil
+from perfis.models import Perfil, Postagem
 
 admin.site.register(Perfil)
 

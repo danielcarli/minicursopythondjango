@@ -75,6 +75,9 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR,  'static'), 
 )
 
+LOGIN_URL = '/'
+LOGIN_REDIRECT_URL = '/'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/

@@ -18,3 +18,10 @@ body {
 .navbar .nav > li > a  {
     color: #dfdfdf;
 }
+
+.errorlist {
+    list-style: none;
+    color: red;
+}
+
+   

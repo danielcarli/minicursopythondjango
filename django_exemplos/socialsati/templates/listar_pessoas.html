@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<div class='container'>
+    <div class='row'>
+        <div class='span12'>
+            <h1>Usuários da rede</h1>
+            {% if usuarios%}
+                <table class='table'>
+                    {% for usuario  in usuarios %}
+                    <tr>    
+                        <td>
+                            {{ usuario.username }}
+                        </td>
+                        <td>
+                            {{ usuario.fist_name }}
+                        </td>
+
+                        <td>
+                            {{ usuario.last_name }}
+                        </td>
+                        <td>
+                            <a class='btn' href="{% url 'perfis.views.perfil' usuario.username %}">
+                                Ver perfil
+                            </a>
+                            {% if not user.username == usuario.username %}
+                            <a class='btn btn-primary' href="{% url 'perfis.views.seguir_pessoa' usuario.username %}">
+                                Seguir perfil
+                            </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                No momento você não está seguindo ninguém.
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

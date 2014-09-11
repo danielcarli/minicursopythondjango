@@ -37,11 +37,16 @@
             <div class="navbar navbar-static-top">
               <div class="navbar-inner">
                 <a class="brand" href="#">Social SATI</a>
+
+                {% if user.is_authenticated%}
                 <ul class="nav">
-                  <li class="active"><a href="#">Perfil</a></li>
-                  <li><a href="#">Seguindo</a></li>
-                  <li><a href="#">Postar</a></li>
+                  <li class="active"><a href="{% url 'perfis.views.perfil' user.username %}">Perfil</a></li>
+                  <li><a href="{% url 'perfis.views.seguindo' %}">Seguindo</a></li>
+                  <li><a href="{% url 'perfis.views.postar' %}">Postar</a></li>
+                  <li><a href="{% url 'perfis.views.listar_pessoas' %}"> Usuários da rede </a></li>
+                  <li><a href="{% url 'django.contrib.auth.views.logout' %}">Sair</a></li>
                 </ul>
+                {% endif %}
               </div>
             </div>
         </div>

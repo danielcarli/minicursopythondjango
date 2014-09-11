@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<div class='container'>
+    <div class='row'>
+        <div class='span12'>
+            <h1>Seguindo</h1>
+            {% if seguindo %}
+                <table class='table'>
+                    {% for usuario  in seguindo %}
+                    <tr>    
+                        <td>
+                            {{ usuario.username }}
+                        </td>
+                        <td>
+                            {{ usuario.fist_name }}
+                        </td>
+
+                        <td>
+                            {{ usuario.last_name }}
+                        </td>
+                        <td>
+                            <a class='btn' href="{% url 'perfis.views.perfil' usuario.username %}">
+                                Ver perfil
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                No momento você não está seguindo ninguém.
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

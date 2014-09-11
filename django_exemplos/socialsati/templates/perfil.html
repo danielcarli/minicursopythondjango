@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<div class='container'>
+    <div class='row'>
+        <div class='span12'>
+            <h1>{{ nome_do_usuario }}</h1>
+            
+             {% if not user.username == nome_do_usuario %}
+            <a class='btn btn-primary' href="{% url 'perfis.views.seguir_pessoa' usuario.username %}">
+                Seguir perfil
+            </a>
+            {% endif %}
+            <hr>
+        </div>
+    </div>
+
+    <div class='row'>
+        <div class='span6'>
+            <h3>Postagens amigos</h3>
+
+            {% if postagens_amigos %}
+                {% for postagem in postagens_amigos %}
+                <div class='well'>
+                    {{ postagem.conteudo }}
+                    <!--
+                    <hr>
+                    {{ postagem.data }}
+                    -->
+                </div>
+                <br>
+                {% endfor %}
+            {% else %}
+                Sem postagens
+            {% endif %}
+        </div>
+        <div class='span6'>
+            <h3>Minhas postagens</h3>
+
+            {% if postagens_minhas %}
+                {% for postagem in postagens_minhas %}
+                <div class='well'>
+                    {{ postagem.conteudo }}
+                    <!--
+                    <hr>
+                    {{ postagem.data }}
+                    -->
+                </div>
+                <br>
+                {% endfor %}
+              {% else %}
+                Sem postagens
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
