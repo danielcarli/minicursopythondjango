@@ -65,7 +65,7 @@ def  login(request):
      
 
     return render_to_response(
-                'login2.html',
+                'login.html',
                 {
                     'form':form,
                 },
