@@ -1406,10 +1406,9 @@ USE_TZ = False
 - Na aplicação **perfis** defina os seguintes campos:
     - nome_cidade: charfield com tamanho máximo de 32 caracteres
     - usuario: sendo esse uma ForeignKey para ->  from django.contrib.auth.models import User. Definir o atributo **related_name** para related_name='perfil'  
-    - foto: ImageFiel para fazer upload para "perfis/%Y/%m/%d/%h"
     - seguindo: sendo um campo ManyToMany para from django.contrib.auth.models import User. Definir o atributo **related_name** para related_name='seguido'
 
-- Na aplicação **postagens** defina os seguintes campos:
+- Na aplicação **postagens** defina uma Classe chamada Post com os seguintes campos:
     - postado_por: Sendo esse uma ForeignKey para ->  from django.contrib.auth.models import User.
     - conteudo: Sendo um CharField que aceita no máximo de 140 caracteres. 
     - data: adicione a esse campo o auto_now_add=True
