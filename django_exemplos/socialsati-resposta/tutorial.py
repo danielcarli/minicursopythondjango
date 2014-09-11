@@ -117,6 +117,7 @@ from django.contrib.auth.models import User
 #################### views.py (Parte 2) 
 ########################################################
 
+
 def  login(request):
     # formulário de autenticação
     form = AuthenticationForm(request)
@@ -161,8 +162,12 @@ def  login(request):
                 },
                 context_instance=RequestContext(request))
 
+#### Arquivo de configuração da url
+url(r'^/?$','perfis.views.login'),
 
-
+#### Sair
+url(r'^logout$','django.contrib.auth.views.logout',{'next_page':'/'}, 
+        name='logout'),
 
 ########
 ## login.html
@@ -205,7 +210,7 @@ Mostrar e explicar
 def perfil(request, usuario):
     perfil = Perfil.objects.get(usuario__username=usuario)
 
-    postagens_minhas = Postagem.objects.filter(postado_por=request.user).order_by('-id')
+    postagens_minhas = Postagem.objects.filter(postado_por=perfil.usuario).order_by('-id')
     postagens_amigos = Postagem.objects.filter(postado_por__in=perfil.seguindo.all()).order_by('-id')
 
     nome_do_usuario = usuario
@@ -220,8 +225,304 @@ def perfil(request, usuario):
         context_instance=RequestContext(request)
         )
 
-
+#### Arquivo de configuração da url
+url(r'^perfil/(?P<usuario>.*)','perfis.views.perfil'),
+   
 
 ########
-## login.html
+## perfil.html
 ########
+
+
+
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<div class='container'>
+    <div class='row'>
+        <div class='span12'>
+            <h1>{{ perfil.usuario.username }}</h1>
+
+             {% if not user.username == perfil.usuario.username %}
+                <a class='btn btn-primary' href="{% url 'perfis.views.seguir_pessoa' usuario.username %}">
+                 Seguir perfil
+                </a>
+            {% endif %}
+            <hr>
+        </div>
+    </div>
+
+    <div class='row'>
+        <div class='span6'>
+            <h3>Postagens amigos</h3>
+
+            {% if postagens_amigos %}
+                {% for postagem in postagens_amigos %}
+                <div class='well'>
+                    {{ postagem.conteudo }}
+                    <!--
+                    <hr>
+                    {{ postagem.data }}
+                    -->
+                </div>
+                <br>
+                {% endfor %}
+            {% else %}
+                Sem postagens
+            {% endif %}
+        </div>
+        <div class='span6'>
+            <h3>Minhas postagens</h3>
+
+            {% if postagens_minhas %}
+                {% for postagem in postagens_minhas %}
+                <div class='well'>
+                    {{ postagem.conteudo }}
+                    <!--
+                    <hr>
+                    {{ postagem.data }}
+                    -->
+                </div>
+                <br>
+                {% endfor %}
+              {% else %}
+                Sem postagens
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+
+########## postar
+#################### views.py (Parte 3) 
+########################################################
+
+@login_required
+def postar(request):
+    from perfis.forms import PostagemForm
+
+    form = PostagemForm(request.POST or None)
+
+    if form.is_valid():
+        postagem = form.instance
+        postagem.postado_por = request.user
+        postagem.save()
+
+        return redirect(reverse('perfis.views.perfil',
+                                kwargs={'usuario':request.user}))
+     
+
+
+    return render_to_response(
+            'postar.html',
+            {'form': form},
+            context_instance=RequestContext(request)
+        )
+
+#### Arquivo forms.py
+# -*-  coding: utf-8 -*-
+#@Author Daniel Michelon De Carli<daniel.de.carli@gmail.com>
+
+from django import forms
+from perfis.models import Postagem
+
+class PostagemForm(forms.ModelForm):
+    class Meta:
+        model = Postagem
+
+        fields = (  
+            'conteudo',
+        )
+
+
+
+####
+## postar.html
+####
+
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<div class='container'>
+    <div class='row'>
+        <div class='span12'>
+            <center>
+                <form method='POST' action=''>
+                    {% csrf_token %}
+                    {{ form }}
+                    <br>
+                    <button type='submit' class='btn btn-primary'>Postar</button>
+                </form>
+            </center>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+### Configuração da url
+url(r'^postar/?$','perfis.views.postar'),
+    
+
+########## listar pessoas
+#################### views.py (Parte 4) 
+########################################################
+
+@login_required
+def listar_pessoas(request):
+    usuarios = User.objects.filter(is_active=True)
+
+    return render_to_response(
+        'listar_pessoas.html',
+        {
+            'usuarios': usuarios
+        },
+        context_instance=RequestContext(request)
+        )
+
+
+####
+## listar_pessoas.html
+####
+
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<div class='container'>
+    <div class='row'>
+        <div class='span12'>
+            <h1>Usuários da rede</h1>
+            {% if usuarios%}
+                <table class='table'>
+                    {% for usuario  in usuarios %}
+                    <tr>    
+                        <td>
+                            {{ usuario.username }}
+                        </td>
+                        <td>
+                            {{ usuario.fist_name }}
+                        </td>
+
+                        <td>
+                            {{ usuario.last_name }}
+                        </td>
+                        <td>
+                            <a class='btn' href="{% url 'perfis.views.perfil' usuario.username %}">
+                                Ver perfil
+                            </a>
+                            {% if not user.username == usuario.username %}
+                            <a class='btn btn-primary' href="{% url 'perfis.views.seguir_pessoa' usuario.username %}">
+                                Seguir perfil
+                            </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                No momento você não está seguindo ninguém.
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+########## Seguir pessoa
+#################### views.py (Parte 5) 
+########################################################
+
+@login_required
+def seguir_pessoa(request, usuario):
+    perfil = Perfil.objects.get(usuario=request.user)
+
+    seguir = User.objects.get(username=usuario)
+
+    perfil.seguindo.add(seguir)
+
+    seguindo = perfil.seguindo.all()
+
+    return render_to_response(
+        'seguindo.html',
+        {
+            'seguindo': seguindo,
+        },
+        context_instance=RequestContext(request)
+        )
+
+### Configuração da URL
+url(r'^seguir/(?P<usuario>.*)','perfis.views.seguir_pessoa'),
+    
+########## Seguindo
+#################### views.py (Parte 6) 
+########################################################
+
+@login_required
+def seguindo(request):
+    perfil = Perfil.objects.get(usuario=request.user)
+    seguindo = perfil.seguindo.all()
+
+    return render_to_response(
+        'seguindo.html',
+        {
+            'seguindo': seguindo,
+        },
+        context_instance=RequestContext(request)
+        )
+
+
+### Configuração da URL
+url(r'^seguindo/?$','perfis.views.seguindo'),
+   
+
+####
+## listar_pessoas.html
+####
+
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<div class='container'>
+    <div class='row'>
+        <div class='span12'>
+            <h1>Seguindo</h1>
+            {% if seguindo %}
+                <table class='table'>
+                    {% for usuario  in seguindo %}
+                    <tr>    
+                        <td>
+                            {{ usuario.username }}
+                        </td>
+                        <td>
+                            {{ usuario.fist_name }}
+                        </td>
+
+                        <td>
+                            {{ usuario.last_name }}
+                        </td>
+                        <td>
+                            <a class='btn' href="{% url 'perfis.views.perfil' usuario.username %}">
+                                Ver perfil
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                No momento você não está seguindo ninguém.
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+

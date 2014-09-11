@@ -116,18 +116,6 @@ def postar(request):
         )
 
 
-@login_required
-def seguindo(request):
-    perfil = Perfil.objects.get(usuario=request.user)
-    seguindo = perfil.seguindo.all()
-
-    return render_to_response(
-        'seguindo.html',
-        {
-            'seguindo': seguindo,
-        },
-        context_instance=RequestContext(request)
-        )
 
 @login_required
 def listar_pessoas(request):
@@ -137,6 +125,20 @@ def listar_pessoas(request):
         'listar_pessoas.html',
         {
             'usuarios': usuarios
+        },
+        context_instance=RequestContext(request)
+        )
+
+
+@login_required
+def seguindo(request):
+    perfil = Perfil.objects.get(usuario=request.user)
+    seguindo = perfil.seguindo.all()
+
+    return render_to_response(
+        'seguindo.html',
+        {
+            'seguindo': seguindo,
         },
         context_instance=RequestContext(request)
         )
