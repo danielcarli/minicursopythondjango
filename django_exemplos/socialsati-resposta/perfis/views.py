@@ -52,7 +52,7 @@ def  login(request):
                     #tenta pegar o perfil do usuário
                     # Caso o perfil não seja encontrado o django
                     # irá lançar um exceção
-                    perfil = Perfil.objects.get(user=request.user)
+                    perfil = Perfil.objects.get(usuario=request.user)
                 except:
                     # Caso não exista o perfil é necessário cria-lo
                     # vamos crirar ele no tratamento da exceção

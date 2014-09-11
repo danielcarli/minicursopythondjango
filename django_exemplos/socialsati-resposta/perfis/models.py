@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 
 class Perfil(models.Model):
     #nome_cidade = models.CharField(max_length=32, null=True, blank=True)
-    usuario = models.ForeignKey(User)
+    usuario = models.ForeignKey(User, unique=True)
     seguindo = models.ManyToManyField(User, null=True, blank=True, related_name='segue')
 
     def __unicode__(self):

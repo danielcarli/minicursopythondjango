@@ -65,15 +65,6 @@ DATABASES = {
 }
 
 
-#Necessário para o exercício
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR,  'templates'),
-)
-
-#Necessário para o exercício
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR,  'static'), 
-)
 
 LOGIN_URL = '/'
 LOGIN_REDIRECT_URL = '/'
