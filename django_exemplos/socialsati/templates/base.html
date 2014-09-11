@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8"/>
+    <title>Social SATI</title>   
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+   
+    <link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/docs/assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/docs/assets/css/bootstrap-responsive.css" >
+    <link rel="stylesheet" href="{{ STATIC_URL }}custom.css" />
+
+  
+    <script type="text/javascript" src="{{ STATIC_URL }}bootstrap/docs/assets/js/widgets.js"></script>
+    
+   
+
+    
+    {% block pg-script %}
+        <!-- -->
+    {% endblock %}
+   
+
+    {% block pg-css %}
+        
+    {% endblock %}
+
+</head>
+
+<body >
+
+<!-- Menu -->
+<div class='container'>
+    <div class='row'>
+        <div class='span12'>
+            <div class="navbar navbar-static-top">
+              <div class="navbar-inner">
+                <a class="brand" href="#">Social SATI</a>
+                <ul class="nav">
+                  <li class="active"><a href="#">Perfil</a></li>
+                  <li><a href="#">Seguindo</a></li>
+                  <li><a href="#">Postar</a></li>
+                </ul>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Menu -->
+
+
+<!-- conteudo -->
+{% block conteudo %}
+
+{% endblock %}
+<!-- /conteudo -->
+
+
+
+    
+
+    
+    
+</body>
+</html>

@@ -1,3 +1,4 @@
+# coding: utf-8
 """
 Django settings for socialsati project.
 
@@ -36,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'perfis',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -62,10 +64,22 @@ DATABASES = {
     }
 }
 
+
+#Necessário para o exercício
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR,  'templates'),
+)
+
+#Necessário para o exercício
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR,  'static'), 
+)
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'UTC'
 
