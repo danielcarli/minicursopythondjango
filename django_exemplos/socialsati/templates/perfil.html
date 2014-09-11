@@ -5,12 +5,12 @@
 <div class='container'>
     <div class='row'>
         <div class='span12'>
-            <h1>{{ nome_do_usuario }}</h1>
-            
-             {% if not user.username == nome_do_usuario %}
-            <a class='btn btn-primary' href="{% url 'perfis.views.seguir_pessoa' usuario.username %}">
-                Seguir perfil
-            </a>
+            <h1>{{ perfil.usuario.username }}</h1>
+
+             {% if not user.username == perfil.usuario.username %}
+                <a class='btn btn-primary' href="{% url 'perfis.views.seguir_pessoa' usuario.username %}">
+                 Seguir perfil
+                </a>
             {% endif %}
             <hr>
         </div>

@@ -88,7 +88,7 @@ def perfil(request, usuario):
         {
             'postagens_minhas': postagens_minhas,
             'postagens_amigos' : postagens_amigos,
-            'nome_do_usuario': nome_do_usuario
+            'perfil': perfil
         },
         context_instance=RequestContext(request)
         )
