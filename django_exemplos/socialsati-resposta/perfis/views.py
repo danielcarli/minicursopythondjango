@@ -78,7 +78,7 @@ def  login(request):
 def perfil(request, usuario):
     perfil = Perfil.objects.get(usuario__username=usuario)
 
-    postagens_minhas = Postagem.objects.filter(postado_por=request.user).order_by('-id')
+    postagens_minhas = Postagem.objects.filter(postado_por=perfil.usuario).order_by('-id')
     postagens_amigos = Postagem.objects.filter(postado_por__in=perfil.seguindo.all()).order_by('-id')
 
     nome_do_usuario = usuario
