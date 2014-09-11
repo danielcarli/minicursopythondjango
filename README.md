@@ -1403,16 +1403,21 @@ USE_TZ = False
     - perfis
     - postagens
 
-- Na aplicação **perfis** defina os seguintes campos:
+- Na aplicação **perfis** defina uma classe Perfil  defina os seguintes campos:
     - nome_cidade: charfield com tamanho máximo de 32 caracteres
     - usuario: sendo esse uma ForeignKey para ->  from django.contrib.auth.models import User. Definir o atributo **related_name** para related_name='perfil'  
-    - seguindo: sendo um campo ManyToMany para from django.contrib.auth.models import User. Definir o atributo **related_name** para related_name='seguido'
+    - seguindo: sendo um campo ManyToMany para from django.contrib.auth.models import User. Definir o atributo **related_name** para related_name='segue',  null=True  e blank=True
 
-- Na aplicação **postagens** defina uma Classe chamada Post com os seguintes campos:
+    - def __unicode__(self):
+        return self.usuario.username
+
+- Na aplicação **postagens** defina uma Classe chamada Postagem com os seguintes campos:
     - postado_por: Sendo esse uma ForeignKey para ->  from django.contrib.auth.models import User.
     - conteudo: Sendo um CharField que aceita no máximo de 140 caracteres. 
     - data: adicione a esse campo o auto_now_add=True
 
+    def __unicode__(self):
+        return u"Conteúdo: %s - postado por: %s"%(self.conteudo, self.postado_por.username)
 
 
 
